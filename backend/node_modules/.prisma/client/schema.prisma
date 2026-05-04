@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  name      String
+  role      String    @default("MEMBER")
+  projects  Project[]
+  tasks     Task[]
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  ownerId     Int
+  owner       User      @relation(fields: [ownerId], references: [id])
+  tasks       Task[]
+  messages    Message[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Task {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String?
+  status      String       @default("PENDING")
+  priority    String       @default("MEDIUM")
+  dueDate     DateTime?
+  timeSpent   Int          @default(0) // time spent in seconds
+  projectId   Int
+  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assigneeId  Int?
+  assignee    User?        @relation(fields: [assigneeId], references: [id])
+  subtasks    Subtask[]
+  attachments Attachment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Subtask {
+  id        Int      @id @default(autoincrement())
+  title     String
+  isDone    Boolean  @default(false)
+  taskId    Int
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attachment {
+  id        Int      @id @default(autoincrement())
+  fileName  String
+  fileUrl   String
+  taskId    Int
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  projectId Int
+  senderId  Int
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
