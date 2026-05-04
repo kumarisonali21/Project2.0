@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Full-Stack Team Task Manager
 
 This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express), PostgreSQL (Prisma ORM), and Tailwind CSS. It features JWT-based authentication and Role-Based Access Control (Admin vs. Member).
@@ -61,3 +62,7 @@ For reviewers evaluating this project:
 - Use a tool like Postman to grab the `MEMBER`'s JWT token.
 - Try to make a `DELETE` request to `/api/projects/1` or `/api/tasks/1` using the `MEMBER` token.
 - The server will reject the request with a `403 Forbidden` error ("Access denied. Admin role required."), proving the RBAC implementation works flawlessly.
+=======
+# Project2.0
+Team Task Manager TaskFlow is a robust, full-stack project management application designed to streamline team collaboration. It features a secure, role-based access control system that allows teams to organize projects, assign tasks, and track real-time progress through an intuitive dashboard.
+>>>>>>> e3393f48ad9cfa5826fefc69d3bdd1ccb4e6d551
