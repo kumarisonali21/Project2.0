@@ -310,7 +310,11 @@ cron.schedule('0 9 * * *', async () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Backend is running ");
+  res.json({ message: "API is working 🚀" });
+});
+
+app.get("/api/test", (req, res) => {
+  res.json({ status: "success", data: "Backend working fine" });
 });
 
 const PORT = process.env.PORT || 5000;
