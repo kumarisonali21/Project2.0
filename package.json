@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "prisma": "cd backend && npm run prisma",
+    "generate": "cd backend && npm run generate",
+    "db:push": "cd backend && npm run db:push",
+    "migrate:dev": "cd backend && npm run migrate:dev"
+  },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "prisma": "^5.22.0"

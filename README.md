@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Full-Stack Team Task Manager
 
 This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express), PostgreSQL (Prisma ORM), and Tailwind CSS. It features JWT-based authentication and Role-Based Access Control (Admin vs. Member).
@@ -6,7 +5,7 @@ This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express
 ## Key Features
 - **Authentication**: JWT-based login and signup.
 - **Role-Based Access Control (RBAC)**:
-  - **Member**: Can only view their assigned tasks and update the task status (Pending, In Progress, Completed).
+  - **Member**: Can only view their assigned tasks and update the task status.
   - **Admin**: Can create, edit, and delete any tasks and projects.
 - **Dashboard**: Shows metrics like "Total Tasks", "Completed", and "Overdue".
 
@@ -25,8 +24,8 @@ This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express
    JWT_SECRET="your_secret_key"
    PORT=5000
    ```
-4. Push the Prisma schema to your database: `npx prisma db push`
-5. Generate the Prisma client: `npx prisma generate`
+4. Push the Prisma schema to your database: `npm run db:push`
+5. Generate the Prisma client: `npm run generate`
 6. Start the server: `npm run dev` (Runs on `http://localhost:5000`)
 
 ### 2. Frontend Setup
@@ -37,32 +36,30 @@ This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express
 
 ## Railway Deployment Instructions
 
-Deploying this app to Railway is simple because it's configured to use `process.env.PORT` and `DATABASE_URL`.
-
-### Database Setup on Railway
-1. Go to [Railway](https://railway.app/).
-2. Click **New Project** -> **Provision PostgreSQL**.
-3. Once provisioned, click on your PostgreSQL database, go to the **Variables** tab, and copy the `DATABASE_URL`.
-
 ### Backend Deployment
-1. Upload your repository to GitHub.
-2. In Railway, click **New Project** -> **Deploy from GitHub repo** and select your repository.
-3. Configure the **Root Directory** to `/backend` in the service settings.
-4. Add the following Environment Variables in the Railway Dashboard:
-   - `DATABASE_URL`: Paste the PostgreSQL URL you copied earlier.
-   - `JWT_SECRET`: Any random strong string (e.g., `my_super_secret_jwt_key_123`).
-   - *Note: Railway will automatically provide a `PORT` variable, and `server.js` is already configured to use it (`process.env.PORT`).*
-5. Add a custom Build Command (if needed) or rely on the `postinstall` script in `package.json` to generate the Prisma client (`prisma generate`).
-6. Railway will automatically build and deploy the Node.js server.
+1. Go to [Railway](https://railway.app/) and log in with GitHub.
+2. Click **New Project** -> **Deploy from GitHub**.
+3. Select your repository `Project2.0`.
+4. Set the service root to `backend`.
+5. Add these environment variables in Railway:
+   - `DATABASE_URL`: Railway PostgreSQL connection string.
+   - `JWT_SECRET`: Strong random string.
+6. Leave the start command as `npm run start`.
+7. Railway will automatically install dependencies and run the app.
 
-### Role-Based Access Control (RBAC) Testing Note
-For reviewers evaluating this project:
-- Register a user and assign them the role of `MEMBER`.
-- Register a second user and assign them the role of `ADMIN`.
-- Use a tool like Postman to grab the `MEMBER`'s JWT token.
-- Try to make a `DELETE` request to `/api/projects/1` or `/api/tasks/1` using the `MEMBER` token.
-- The server will reject the request with a `403 Forbidden` error ("Access denied. Admin role required."), proving the RBAC implementation works flawlessly.
-=======
-# Project2.0
-Team Task Manager TaskFlow is a robust, full-stack project management application designed to streamline team collaboration. It features a secure, role-based access control system that allows teams to organize projects, assign tasks, and track real-time progress through an intuitive dashboard.
->>>>>>> e3393f48ad9cfa5826fefc69d3bdd1ccb4e6d551
+### Notes for Railway
+- The backend already uses `process.env.PORT`.
+- `backend/package.json` includes Prisma scripts and generation commands.
+- If you use Railway PostgreSQL, make sure `DATABASE_URL` is set in Railway.
+
+## Deployment Commands
+From the repo root, you can also run:
+- `npm run db:push`
+- `npm run migrate:dev`
+- `npm run generate`
+
+These commands are forwarded to `backend`.
+
+## Env Example
+See `backend/.env.example` for the exact required variables.
+
