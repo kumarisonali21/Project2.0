@@ -8,11 +8,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
 const { authenticate, requireAdmin } = require('./middleware/auth');
 const analyticsRouter = require('./routes/analytics');
 const featuresRouter = require('./routes/features');
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+});
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
