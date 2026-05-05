@@ -1,6 +1,6 @@
 # Full-Stack Team Task Manager
 
-This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express), PostgreSQL (Prisma ORM), and Tailwind CSS. It features JWT-based authentication and Role-Based Access Control (Admin vs. Member).
+This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express), PostgreSQL (Prisma ORM v7), and Tailwind CSS. It features JWT-based authentication and Role-Based Access Control (Admin vs. Member).
 
 ## Key Features
 - **Authentication**: JWT-based login and signup.
@@ -10,7 +10,7 @@ This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express
 - **Dashboard**: Shows metrics like "Total Tasks", "Completed", and "Overdue".
 
 ## Directory Structure
-- `/backend`: Node.js, Express, Prisma, PostgreSQL.
+- `/backend`: Node.js, Express, Prisma v7, PostgreSQL.
 - `/frontend`: React, Vite, Tailwind CSS.
 
 ## Local Setup Instructions
@@ -51,6 +51,7 @@ This is a Full-Stack Team Task Manager built with React (Vite), Node.js (Express
 - The backend already uses `process.env.PORT`.
 - `backend/package.json` includes Prisma scripts and generation commands.
 - If you use Railway PostgreSQL, make sure `DATABASE_URL` is set in Railway.
+- Prisma v7 uses a configuration file (`prisma.config.js`) and adapter-based connections.
 
 ## Deployment Commands
 From the repo root, you can also run:
